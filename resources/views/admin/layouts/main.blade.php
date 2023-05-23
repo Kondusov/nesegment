@@ -56,11 +56,11 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  @yield('content');
+  @yield('content')
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2023 <a href="https://nesegment.ru">NeSegment</a>.</strong>
-    All rights reserved.
+    All rights.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 0.0.1
     </div>

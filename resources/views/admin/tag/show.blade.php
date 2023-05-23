@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Категория : {{ $category->title }}</h1>
+          <h1 class="m-0">Тег : {{ $tag->title }}</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -30,13 +30,22 @@
               <tbody>
                 <tr>
                   <td>ID</td>
-                  <td>Категория</td>
-                  <td>Действие</td>
+                  <td>Тег</td>
+                  <td class="text-center">Действие</td>
                 </tr>
                 <tr>
-                  <td>{{$category->id}}</td>
-                  <td>{{$category->title}}</td>
-                  <td title="Редактировать"><a href="{{ route('admin.category.edit', $category->id) }}"><i class="fas fa-edit text-success"></i></a></td>
+                  <td>{{$tag->id}}</td>
+                  <td>{{$tag->title}}</td>
+                  <td class="d-flex justify-content-around px-1">
+                    <a title="Редактировать" href="{{ route('admin.tag.edit', $tag->id) }}"><i class="fas fa-edit text-success"></i></a>
+                    <form action="{{ route('admin.tag.delete', $tag->id) }}" method="POST" class="d-inline">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="col-md-auto">
+                        <i title="Удалить" class="fas fa-trash text-danger"></i>
+                      </button>
+                    </form>
+                  </td>
                 </tr>
               </tbody>
             </table>

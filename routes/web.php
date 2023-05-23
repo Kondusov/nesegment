@@ -17,9 +17,19 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
         Route::get('/{category}', 'ShowController')->name('admin.category.show');
         Route::get('/{category}/edit', 'EditController')->name('admin.category.edit');
         Route::patch('/{category}', 'UpdateController')->name('admin.category.update');
+        Route::delete('/{category}', 'DeleteController')->name('admin.category.delete');
+    });
+    Route::group(['namespace' => 'Tag', 'prefix' => 'tags'], function () {
+        Route::get('/', 'IndexController')->name('admin.tag.index');
+        Route::get('/create', 'CreateController')->name('admin.tag.create');
+        Route::post('/', 'StoreController')->name('admin.tag.store');
+        Route::get('/{tag}', 'ShowController')->name('admin.tag.show');
+        Route::get('/{tag}/edit', 'EditController')->name('admin.tag.edit');
+        Route::patch('/{tag}', 'UpdateController')->name('admin.tag.update');
+        Route::delete('/{tag}', 'DeleteController')->name('admin.tag.delete');
     });
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
