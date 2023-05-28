@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
+            $table->json('image')->nullable();
+            $table->json('file')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

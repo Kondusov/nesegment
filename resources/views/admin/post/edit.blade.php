@@ -26,35 +26,63 @@
       <div class="row">
         <div class="card card-primary">
         </div>
-        <form action="{{ route('admin.post.update', $post->id) }}" method="post" >
+        <form action="{{ route('admin.post.update', $post->id) }}" method="post">
           @csrf
           @method('PATCH')
           <div class="card-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Название поста</label>
-              <input name="title" type="text" class="form-control" value="{{ $post->title }}" placeholder="Введите название">
+              <input name="title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите название" value="{{ $post->title }}">
               @error('title')
               <div class="text-danger">{{ $message }}</div>
               @enderror
-              <label for="exampleInputEmail1">Описание поста</label>
-              <textarea name="content" type="message" class="form-control" placeholder="Введите текст">{{ $post->content }}</textarea>
-              @error('content')
-              <div class="text-danger">{{ $message }}</div>
-              @enderror
             </div>
-            <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Сохранить</button>
+            <label for="exampleInputEmail1">Описание</label>
+            <textarea name="content" type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите текст">{{ null !== old('content') ? old('content') : $post->content }}</textarea>
+            @error('content')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
+            <div class="form-group">
+              <label>Выберите категорию</label>
+              <select class="form-control" name="category_id">
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>{{ $category->title }}</option>
+                @endforeach
+              </select>
             </div>
-        </form>
+            <div class="form-group">
+              <label>Выберите теги</label>
+              <select name="tag_ids[]" multiple class="form-control">
+                @foreach($tags as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <label for="image_uploads">Добавление изображений (PNG, JPG)</label>
+          <input type="file" id="image_uploads" name="image[]" accept=".jpg, .jpeg, .png" value="{{ old('image') }}" multiple />
+          @error('image')
+          <div class="text-danger">{{ $message }}</div>
+          @enderror
+          <label for="image_uploads">Добавление файлов (PDF, TXT, DOC, EXEL, DOCX, ODT)</label>
+          <input type="file" id="file_uploads" name="file" accept=".pdf, .txt, .doc, .exel, .docx, .odt" value="{{ old('file') }}" multiple />
+          @error('file')
+          <div class="text-danger">{{ $message }}</div>
+          @enderror
       </div>
-      <!-- ./col -->
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+      </div>
+      </form>
     </div>
-    <!-- /.row -->
-    <!-- Main row -->
-    <div class="row">
+    <!-- ./col -->
+</div>
+<!-- /.row -->
+<!-- Main row -->
+<div class="row">
 
-    </div>
-    <!-- /.row (main row) -->
+</div>
+<!-- /.row (main row) -->
 </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->

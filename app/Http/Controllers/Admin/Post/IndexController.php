@@ -11,6 +11,9 @@ class IndexController extends Controller
     public function __invoke()
     {
         $post = Post::all();
+        //dd($post['image']);
+        //$data['image'] = json_encode($img_push_bd);
+        //dd($post);
         return view('admin.post.index', compact('post'));
     }
 }

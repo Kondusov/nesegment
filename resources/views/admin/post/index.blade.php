@@ -35,6 +35,8 @@
                   <th>ID</th>
                   <th>Название</th>
                   <th>Описание</th>
+                  <th>Изображения</th>
+                  <th>Файлы</th>
                   <th class="text-center">Действие</th>
                 </tr>
               </thead>
@@ -44,6 +46,31 @@
                   <td>{{$post->id}}</td>
                   <td>{{$post->title}}</td>
                   <td>{{$post->content}}</td>
+                  <td>
+                    @if($post['image'])
+                      @php
+                        //var_dump($post['image']);
+                        //die();
+                        $post['image'] = json_decode($post['image'], true);
+                        //var_dump($post['image']);
+                        //die();
+                      @endphp
+                      @foreach($post['image'] as $img)
+                        <img src="{{ url('storage/' . $img['img_path'] ) }}" class="w-25">
+                        <a href="{{ url('storage/' . $img['img_path'] ) }}" title="скачать" download>{{ $img['img_origin_name'] }}</a>
+                      @endforeach
+                    @endif
+                  </td>
+                  <td>
+                    @if($post['file'])
+                    @php
+                    $post['file'] = json_decode($post['file'], true);
+                    @endphp
+                    @foreach($post['file'] as $file)
+                      <a href="{{ url('storage/' . $file['file_path'] ) }}" title="скачать" download>{{ $file['file_origin_name'] }}</a>
+                    @endforeach
+                    @endif
+                  </td>
                   <td class="d-flex justify-content-around px-1">
                     <a href="{{ route('admin.post.show', $post->id) }}"><i class="fas fa-eye"></i></a>
                     <a href="{{ route('admin.post.edit', $post->id) }}"><i class="fas fa-edit text-success"></i></a>
