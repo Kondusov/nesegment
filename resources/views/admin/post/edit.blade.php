@@ -26,7 +26,7 @@
       <div class="row">
         <div class="card card-primary">
         </div>
-        <form action="{{ route('admin.post.update', $post->id) }}" method="post">
+        <form action="{{ route('admin.post.update', $post->id) }}" method="post" enctype="multipart/form-data" >
           @csrf
           @method('PATCH')
           <div class="card-body">
@@ -38,7 +38,7 @@
               @enderror
             </div>
             <label for="exampleInputEmail1">Описание</label>
-            <textarea name="content" type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите текст">{{ null !== old('content') ? old('content') : $post->content }}</textarea>
+            <textarea name="content" type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите текст">{{ $post->content }}</textarea>
             @error('content')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -46,7 +46,7 @@
               <label>Выберите категорию</label>
               <select class="form-control" name="category_id">
                 @foreach($categories as $category)
-                <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>{{ $category->title }}</option>
+                <option value="{{ $category->id }}">{{ $category->title }}</option>
                 @endforeach
               </select>
             </div>
@@ -60,12 +60,12 @@
             </div>
           </div>
           <label for="image_uploads">Добавление изображений (PNG, JPG)</label>
-          <input type="file" id="image_uploads" name="image[]" accept=".jpg, .jpeg, .png" value="{{ old('image') }}" multiple />
+          <input type="file" id="image_uploads" name="image[]" accept=".jpg, .jpeg, .png" multiple />
           @error('image')
           <div class="text-danger">{{ $message }}</div>
           @enderror
           <label for="image_uploads">Добавление файлов (PDF, TXT, DOC, EXEL, DOCX, ODT)</label>
-          <input type="file" id="file_uploads" name="file" accept=".pdf, .txt, .doc, .exel, .docx, .odt" value="{{ old('file') }}" multiple />
+          <input type="file" id="file_uploads" name="file[]" accept=".pdf, .txt, .doc, .exel, .docx, .odt" multiple />
           @error('file')
           <div class="text-danger">{{ $message }}</div>
           @enderror
