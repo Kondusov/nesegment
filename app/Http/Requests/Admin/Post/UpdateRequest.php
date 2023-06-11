@@ -31,4 +31,13 @@ class UpdateRequest extends FormRequest
             'file' => 'nullable|array'
         ];
     }
+
+    public function messages()
+    {
+        return[
+            'title.required' => 'Это поле необходимо для заполнения',
+            'title.string' => 'Это поле для ввода текста',
+            'content.required' => 'Это поле необходимо для заполнения',
+        ];
+    }
 }
