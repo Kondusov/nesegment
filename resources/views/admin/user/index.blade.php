@@ -34,6 +34,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Имя</th>
+                  <th>Роль</th>
                   <th>Email</th>
                   <th class="text-center">Действие</th>
                 </tr>
@@ -43,6 +44,7 @@
                 <tr>
                   <td>{{$user->id}}</td>
                   <td>{{$user->name}}</td>
+                  <td>{{$user->role}}</td>
                   <td>{{$user->email}}</td>
                   <td class="d-flex justify-content-around px-1">
                     <a href="{{ route('admin.user.show', $user->id) }}"><i class="fas fa-eye"></i></a>

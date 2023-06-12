@@ -36,6 +36,19 @@
               @error('name')
               <div class="text-danger">{{ $message }}</div>
               @enderror
+              <div class="form-group">
+                <label>Роль пользователя</label>
+                <select class="form-control" name="role" >
+                    @foreach($roles as $id => $role)
+                      <option value="{{ $id }}"
+                      {{ $id == $user->role ? 'selected' : '' }}
+                      >{{ $role }}</option>
+                    @endforeach
+                </select>
+              </div>
+              @error('role_id')
+              <div class="text-danger">{{ $message }}</div>
+              @enderror
               <label for="exampleInputEmail1">E-mail</label>
               <input name="email" type="email" class="form-control" value="{{ $user->email }}" placeholder="Введите адрес электронной почты">
               @error('email')
