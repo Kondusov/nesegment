@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Редактирование категории</h1>
+          <h1 class="m-0">Редактирование комментария</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -26,14 +26,14 @@
       <div class="row">
         <div class="card card-primary">
         </div>
-        <form action="{{ route('admin.category.update', $category->id) }}" method="post" >
+        <form action="{{ route('personal.comment.update', $comment->id) }}" method="post" >
           @csrf
           @method('PATCH')
           <div class="card-body">
             <div class="form-group">
-              <label for="exampleInputEmail1">Название категории</label>
-              <input name="title" type="text" class="form-control" value="{{ $category->title }}" placeholder="Введите название">
-              @error('title')
+              <label for="exampleInputEmail1">Текст комментария</label>
+              <textarea name="message" class="form-control" placeholder="Введите текст комментария">{{ $comment->message }}</textarea>
+              @error('message')
               <div class="text-danger">{{ $message }}</div>
               @enderror
             </div>
