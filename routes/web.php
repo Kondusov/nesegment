@@ -7,6 +7,17 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', 'IndexController')->name('main');
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth','admin', 'verified']], function () {
+    Route::group(['namespace' => 'Main'], function () {
+    Route::get('/', 'IndexController')->name('personal.main.index');
+    });
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Personal\Liked', 'prefix' => 'liked', 'middleware' => ['auth','admin', 'verified']], function () {
+    Route::get('/', 'IndexController')->name('personal.liked.index');
+    Route::delete('/{post}', 'DeleteController')->name('personal.liked.delete');
+});
+
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth','admin', 'verified']], function () {
     Route::group(['namespace' => 'Main'], function () {
         Route::get('/', 'IndexController')->name('admin.index');

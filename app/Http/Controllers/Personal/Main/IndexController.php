@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Main;
+namespace App\Http\Controllers\Personal\Main;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -13,8 +13,9 @@ class IndexController extends Controller
     {
         $data = [];
         $data['userName'] = auth()->user()->name;
+        //dd($data['userName']);
         $data['usersCount'] = User::all()->count();
         $data['postsCount'] = Post::all()->count();
-        return view('admin.main.index', compact('data'));
+        return view('personal.main.index', compact('data'));
     }
 }
