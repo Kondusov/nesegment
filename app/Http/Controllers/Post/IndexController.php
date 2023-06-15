@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Main;
+namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -11,6 +11,7 @@ class IndexController extends Controller
     public function __invoke()
     {   
         $posts = Post::paginate(3);
-        return redirect()->route('post.index');
+        //dd($posts);
+        return view('post.index', compact('posts'));
     }
 }

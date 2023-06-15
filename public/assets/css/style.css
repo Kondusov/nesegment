@@ -7940,3 +7940,8 @@ label {
   text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
+
+.post-img-size{
+  max-width: 60px;
+  max-height: 50px;
+}

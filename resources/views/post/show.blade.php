@@ -2,10 +2,9 @@
 @section('content')
 <main class="blog">
         <div class="container">
-            <h1 class="edica-page-title" data-aos="fade-up">Лоты</h1>
+            <h1 class="edica-page-title" data-aos="fade-up">Лот - {{ $post->title }} \ заявок {{ $post->comments->count() }}</h1>
             <section class="featured-posts-section">
                 <div class="row">
-                    @foreach($posts as $post)
                     <div class="col-md-12 fetured-post blog-post" data-aos="fade-right">
                         @if($post['image'])
                         @php
@@ -18,14 +17,12 @@
                         </div>
                         @endforeach
                         @endif
-                        <p class="blog-post-category">{{ $post->title }}</p>
+                        <p class="blog-post-category">{{ $post->created_at }}</p>
                         <a href="#!" class="blog-post-permalink">
                             <h6 class="blog-post-title">{{ $post->content }}</h6>
                         </a>
                     </div>
-                    @endforeach
                 </div>
-                <div class="row">{{ $posts->links() }}</div>
             </section>
         </div>
     </main>

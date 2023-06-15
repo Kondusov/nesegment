@@ -19,7 +19,7 @@
                         @endforeach
                         @endif
                         <p class="blog-post-category">{{ $post->title }}</p>
-                        <a href="#!" class="blog-post-permalink">
+                        <a href="{{ route('post.show', $post->id) }}" class="blog-post-permalink">
                             <h6 class="blog-post-title">{{ $post->content }}</h6>
                         </a>
                     </div>
