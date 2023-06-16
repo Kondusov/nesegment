@@ -48,12 +48,22 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav mt-2 mt-lg-0">
+                        @auth()
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span> Eng</a>
+                            <a class="nav-link" href="{{ route('personal.main.index') }}"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span>Личный кабинет</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Download</a>
+                            <form action="{{ route('logout') }}" method="post" >
+                                @csrf
+                                <input type="submit" value="Выйти" class="btn btn-outline-primary">
+                            </form>        
                         </li>
+                        @endauth
+                        @guest()
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('personal.main.index') }}">Войти</a>
+                        </li>
+                        @endguest
                     </ul>
                 </div>
             </nav>
