@@ -37,10 +37,10 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</a>
                             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                                <a class="dropdown-item" href="404.html">404</a>
-                                <a class="dropdown-item" href="coming-soon.html">Coming Soon</a>
+                                <a class="dropdown-item" href="{{ route('category.index') }}">Страница категорий</a>
+                                <a class="dropdown-item" href="coming-soon.html">Позже здесь выведем список категорий</a>
                             </div>
                         </li>
                         <li class="nav-item">

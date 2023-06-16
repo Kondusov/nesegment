@@ -13,8 +13,8 @@
                         @endphp
                         @foreach($post['image'] as $img)
                         <div class="r">
-                            <img src="{{ url('storage/' . $img['img_path'] ) }}" class="post-img-size">
-                            <a href="{{ url('storage/' . $img['img_path'] ) }}" title="скачать" download>{{ $img['img_origin_name'] }}</a>
+                            <img src="{{ asset('storage/' . $img['img_path'] ) }}" class="post-img-size">
+                            <a href="{{ asset('storage/' . $img['img_path'] ) }}" title="скачать" download>{{ $img['img_origin_name'] }}</a>
                         </div>
                         @endforeach
                         @endif
