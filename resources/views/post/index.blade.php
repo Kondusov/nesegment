@@ -7,6 +7,7 @@
                 <div class="row">
                     @foreach($posts as $post)
                     <div class="col-md-12 fetured-post blog-post" data-aos="fade-right">
+                        <div>Всего заявок {{ $post->comments->count() }} </div>
                         @if($post['image'])
                         @php
                             $post['image'] = json_decode($post['image'], true);

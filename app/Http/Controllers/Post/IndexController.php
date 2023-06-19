@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Post $post)
     {   
         $posts = Post::paginate(3);
-        //dd($posts);
+        //$quantityComments = $post->comments->count();
+        //dd($quantityComments);
         return view('post.index', compact('posts'));
     }
 }

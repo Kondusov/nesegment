@@ -2,106 +2,81 @@
 @section('content')
 <main class="blog">
         <div class="container">
-            <h1 class="edica-page-title" data-aos="fade-up">Лот - {{ $post->title }} \ заявок {{ $post->comments->count() }}</h1>
-            <section class="featured-posts-section">
-                <div class="row">
-                    <div class="col-md-12 fetured-post blog-post" data-aos="fade-right">
-                        @if($post['image'])
-                        @php
-                            $post['image'] = json_decode($post['image'], true);
-                        @endphp
-                        @foreach($post['image'] as $img)
-                        <div class="r">
-                            <img src="{{ url('storage/' . $img['img_path'] ) }}" class="post-img-size">
-                            <a href="{{ url('storage/' . $img['img_path'] ) }}" title="скачать" download>{{ $img['img_origin_name'] }}</a>
-                        </div>
-                        @endforeach
-                        @endif
-                        <p class="blog-post-category">{{ $post->created_at }}</p>
-                        <a href="#!" class="blog-post-permalink">
-                            <h6 class="blog-post-title">{{ $post->content }}</h6>
-                        </a>
-                    </div>
-                </div>
-            </section>
+            <h1 class="edica-page-title" data-aos="fade-up">Лот - {{ $post->title }}</h1>
             <section class="comments-list">
             <div class="card card-widget">
               <div class="card-header">
                 <div class="user-block">
-                  <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                  <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
-                  <span class="description">Shared publicly - 7:30 PM Today</span>
+                  <img class="img-circle" src="" alt="User Image">
+                  <span class="username"><a href="#">{{ $post->owner->name }}</a></span>
+                  <span class="description float-right">Опубликовано - {{ $post->created_at }}</span>
                 </div>
                 <!-- /.user-block -->
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" title="Mark as read">
-                    <i class="far fa-circle"></i>
+                  <button type="button" class="btn btn-tool" title="Информация о пользователе">
+                    <i class="fas fa-info"></i>
                   </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
+                  <button type="button" class="btn btn-tool" title="Отправить жалобу на лот или пользователя">
+                    <i class="fas fa-bolt"></i>
                   </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
+                  <button type="button" class="btn btn-tool" title="Написать сообщение пользователю {{ $post->owner->name }} ">
+                    <i class="fas fa-envelope"></i>
                   </button>
+                  <span class="description float-right">Заявок - {{ $post->comments->count() }}</span>
                 </div>
                 <!-- /.card-tools -->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <!-- post text -->
-                <p>Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind
-                  texts. Separated they live in Bookmarksgrove right at</p>
+                <p>{{ $post->content }}</p>
+                @if($post['image'] || $post['file'] )
+                  <!-- Attachment -->
+                  <div class="attachment-block clearfix">
 
-                <p>the coast of the Semantics, a large language ocean.
-                  A small river named Duden flows by their place and supplies
-                  it with the necessary regelialia. It is a paradisematic
-                  country, in which roasted parts of sentences fly into
-                  your mouth.</p>
-
-                <!-- Attachment -->
-                <div class="attachment-block clearfix">
-                  <img class="attachment-img" src="../dist/img/photo1.png" alt="Attachment Image">
-
-                  <div class="attachment-pushed">
-                    <h4 class="attachment-heading"><a href="https://www.lipsum.com/">Lorem ipsum text generator</a></h4>
-
-                    <div class="attachment-text">
-                      Description about the attachment can be placed here.
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
+                    <div class="attachment-pushed">
+                      <div class="attachment-text">
+                        Прикрепленные файлы:
+                      </div>
+                      <!-- /.attachment-text -->
                     </div>
-                    <!-- /.attachment-text -->
+                    <!-- /.attachment-pushed -->
                   </div>
-                  <!-- /.attachment-pushed -->
-                </div>
-                <!-- /.attachment-block -->
-
+                  <!-- /.attachment-block -->
+                @endif
                 <!-- Social sharing buttons -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
-                <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
-                <span class="float-right text-muted">45 likes - 2 comments</span>
+                @if($post['image'])
+                        @php
+                            $post['image'] = json_decode($post['image'], true);
+                        @endphp
+                  @foreach($post['image'] as $img)
+                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-images"></i> 
+                  <a href="{{ url('storage/' . $img['img_path'] ) }}" title="скачать" download>{{ $img['img_origin_name'] }}</a>
+                </button>
+                  @endforeach
+                @endif
+                @if($post['file'])
+                    @php
+                    $post['file'] = json_decode($post['file'], true);
+                    @endphp
+                    @foreach($post['file'] as $file)
+                      <button type="button" class="btn btn-default btn-sm"><i class="far fa-file"></i>
+                        <a href="{{ url('storage/' . $file['file_path'] ) }}" title="скачать" download>{{ $file['file_origin_name'] }}</a>
+                      </button>
+                    @endforeach
+                    @endif
+                 
+                <span class="float-right text-muted">*Здесь будет что-то*</span>
               </div>
               <!-- /.card-body -->
+              @foreach($post->comments as $comment)
               <div class="card-footer card-comments">
-                <div class="card-comment">
-                  <!-- User image -->
-                  <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
-
-                  <div class="comment-text">
-                    <span class="username">
-                      Maria Gonzales
-                      <span class="text-muted float-right">8:03 PM Today</span>
-                    </span><!-- /.username -->
-                    It is a long established fact that a reader will be distracted
-                    by the readable content of a page when looking at its layout.
-                  </div>
-                  <!-- /.comment-text -->
-                </div>
                 <!-- /.card-comment -->
                 <div class="card-comment">
                   <!-- User image -->
-                  <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
-                    @foreach($post->comments as $comment)
+                  
+                    
+                      <img class="img-circle img-sm" src="" alt="User Image">
                         <div class="comment-text">
                             <span class="username">
                             {{ $comment->user->name }}
@@ -109,22 +84,31 @@
                             </span><!-- /.username -->
                             {{ $comment->message }}
                         </div>
-                    @endforeach
+                    
                   <!-- /.comment-text -->
                 </div>
                 <!-- /.card-comment -->
               </div>
+              @endforeach
+              @auth()
               <!-- /.card-footer -->
               <div class="card-footer">
-                <form action="#" method="post">
-                  <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                <form action="{{ route('post.comment.store', $post->id) }}" method="post">
+                @csrf
+                  <div>
+                    <span>Подать заявку</span>
+                  </div>
                   <!-- .img-push is used to add margin to elements next to floating images -->
                   <div class="img-push">
-                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
+                    <input name="message" type="text" class="form-control form-control-sm" placeholder="Текст вашего предложения">
+                  </div>
+                  <div class="">
+                    <input type="submit" class="form-control form-control-sm w-25 btn btn-primary text-light mt-1" value="Отправить" placeholder="Отправить">
                   </div>
                 </form>
               </div>
               <!-- /.card-footer -->
+              @endauth
             </div>
             </section>
             @auth()

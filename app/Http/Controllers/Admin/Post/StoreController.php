@@ -14,7 +14,7 @@ class StoreController extends Controller
     {
         try{
             $data = $request->validated();
-            //dd($data);
+            $data['owner_post'] = auth()->user()->id;
             if(isset($data['image'])){
                 $images = $data['image'];
                 $img_push_bd = [];
