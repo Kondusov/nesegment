@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function __invoke(Category $category)
     {   
         $posts = $category->posts()->paginate(6);
-        //dd($posts);
-        return view('category.post.index', compact('posts'));
+        $categories = Category::all();
+        return view('category.post.index', compact('posts', 'categories'));
     }
 }

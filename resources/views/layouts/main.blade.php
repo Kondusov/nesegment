@@ -17,17 +17,17 @@
     <header class="edica-header">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="{{ route('main.index') }}"><img src="{{ asset('assets/images/logo.svg') }}" alt="Edica"></a>
+                <a class="navbar-brand" href="{{ route('main.index') }}"><span>NeSegment</span></a>
                 <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="edicaMainNav">
                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('main.index') }}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('main.index') }}">Главная <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link" href="{{ route('post.index') }}">Лоты</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="blogDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
@@ -37,10 +37,11 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории ТС</a>
                             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                                <a class="dropdown-item" href="{{ route('category.index') }}">Страница категорий</a>
-                                <a class="dropdown-item" href="coming-soon.html">Позже здесь выведем список категорий</a>
+                                @foreach( $categories as $category)
+                                    <a class="dropdown-item" href="{{ route('category.post.index', $category->id) }}" >{{ $category->title }}</a>
+                                 @endforeach
                             </div>
                         </li>
                         <li class="nav-item">
@@ -50,18 +51,18 @@
                     <ul class="navbar-nav mt-2 mt-lg-0">
                         @auth()
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('personal.main.index') }}"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span>Личный кабинет</a>
+                            <a class="nav-link" href="{{ route('personal.main.index') }}"><i class="fas fa-address-card"></i> Личный кабинет</a>
                         </li>
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="post" >
                                 @csrf
-                                <input type="submit" value="Выйти" class="btn btn-outline-primary">
+                                <input type="submit" value="Выход" class="btn "><i class="fas fa-sign-out-alt"></i>
                             </form>        
                         </li>
                         @endauth
                         @guest()
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('personal.main.index') }}">Войти</a>
+                            <a class="nav-link" href="{{ route('personal.main.index') }}"><i class="fas fa-address-card"></i> Войти</a>
                         </li>
                         @endguest
                     </ul>

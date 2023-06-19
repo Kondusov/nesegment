@@ -2,7 +2,7 @@
 @section('content')
 <main class="blog">
         <div class="container">
-            <h1 class="edica-page-title" data-aos="fade-up">Лот - {{ $post->title }}</h1>
+            <h1 class="edica-page-title text-decoration-underline" data-aos="fade-up">{{ $post->title }}</h1>
             <section class="comments-list">
             <div class="card card-widget">
               <div class="card-header">
@@ -90,7 +90,7 @@
                 <!-- /.card-comment -->
               </div>
               @endforeach
-              @auth()
+              @if($commentWriteAvailable != 0) <!-- если одна заявка текущим пользователем уже была подана, то не выводим форму новой заявки -->
               <!-- /.card-footer -->
               <div class="card-footer">
                 <form action="{{ route('post.comment.store', $post->id) }}" method="post">
@@ -108,10 +108,14 @@
                 </form>
               </div>
               <!-- /.card-footer -->
-              @endauth
+              @endif
             </div>
             </section>
+            @if($commentWriteAvailable === 0)
+              <h2 class="section-title mt-5 aos-init aos-animate" data-aos="fade-up">Ваша заявка принята!</h2>
+            @endif
             @auth()
+            @if($commentWriteAvailable != 0)
             <section class="comment-section">
                         <h2 class="section-title mb-5 aos-init aos-animate" data-aos="fade-up">Создать заявку</h2>
                         <form action="{{ route('post.comment.store', $post->id) }}" method="post">
@@ -144,6 +148,7 @@
                         </form>
                     </section>
                     @endauth
+                    @endif
         </div>
     </main>
 @endsection
