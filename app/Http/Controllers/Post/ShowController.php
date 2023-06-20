@@ -13,8 +13,11 @@ class ShowController extends Controller
     public function __invoke(Post $post)
     {  
         $post['owner'] = $post->ownerPost;
-        
         $commentWriteAvailable = 1;
+        
+        if( $post->owner_post == auth()->user()->id ){
+            $post['commentWriteAvailable'] = 0;
+        }
         if(isset($post->comments)){
             foreach($post->comments as $comment){
                 if($comment->user_id == auth()->user()->id){
@@ -22,6 +25,20 @@ class ShowController extends Controller
                     break;
                 }
             }
+        }
+        switch ($post->status_post) {
+            case 0:
+                $post['statusPostTitle'] = 'Отменено';
+                break;
+            case 1:
+                $post['statusPostTitle'] = 'Подача заявок';
+                break;
+            case 2:
+                $post['statusPostTitle'] = 'В работе';
+                break;
+            case 3:
+                $post['statusPostTitle'] = 'Завершено';
+                break;    
         }
         //$ownerPost_user_id = $post->owner_post;
         //$ownerPost = User::find($ownerPost_user_id);

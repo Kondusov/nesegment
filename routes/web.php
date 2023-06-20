@@ -7,7 +7,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', 'IndexController')->name('main.index');
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\Post', 'prefix' => 'posts'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Post', 'prefix' => 'posts', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'IndexController')->name('post.index');
     Route::get('/{post}', 'ShowController')->name('post.show');
 

@@ -23,6 +23,7 @@
                     <i class="fas fa-envelope"></i>
                   </button>
                   <span class="description float-right">Заявок - {{ $post->comments->count() }}</span>
+                  <span class="description float-right mx-3">Статус : {{ $post['statusPostTitle'] }}</span>
                 </div>
                 <!-- /.card-tools -->
               </div>
@@ -90,7 +91,7 @@
                 <!-- /.card-comment -->
               </div>
               @endforeach
-              @if($commentWriteAvailable != 0) <!-- если одна заявка текущим пользователем уже была подана, то не выводим форму новой заявки -->
+              @if($post['commentWriteAvailable'] != 0) <!-- если одна заявка текущим пользователем уже была подана, то не выводим форму новой заявки -->
               <!-- /.card-footer -->
               <div class="card-footer">
                 <form action="{{ route('post.comment.store', $post->id) }}" method="post">
@@ -115,7 +116,7 @@
               <h2 class="section-title mt-5 aos-init aos-animate" data-aos="fade-up">Ваша заявка принята!</h2>
             @endif
             @auth()
-            @if($commentWriteAvailable != 0)
+            @if($post['commentWriteAvailable'] != 0)
             <section class="comment-section">
                         <h2 class="section-title mb-5 aos-init aos-animate" data-aos="fade-up">Создать заявку</h2>
                         <form action="{{ route('post.comment.store', $post->id) }}" method="post">

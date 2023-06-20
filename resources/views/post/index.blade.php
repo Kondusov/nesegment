@@ -26,6 +26,7 @@
                     <i class="fas fa-envelope"></i>
                   </button>
                   <span class="description float-right">Заявок - {{ $post->comments->count() }}</span>
+                  <span class="description float-right mx-3">Статус : {{ $post['statusPostTitle'] }}</span>
                 </div>
                 <!-- /.card-tools -->
               </div>
@@ -95,7 +96,6 @@
               </div>
               @endforeach
               @auth()
-              
               @if($post['commentWriteAvailable'] !== 0)
               <!-- /.card-footer -->
               <div class="card-footer">

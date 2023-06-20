@@ -13,6 +13,21 @@ class Post extends Model
     protected $table = 'posts';
     protected $guarded = false;
 
+    const STATUS_PUBLISHED = 1;
+    const STATUS_IN_WORK = 2;
+    const STATUS_COMPLETED = 3;
+    const STATUS_CANCELED = 0;
+
+    public static function getStatus($status)
+    {
+        return [
+            self::STATUS_PUBLISHED => 'Прием заявок',
+            self::STATUS_IN_WORK => 'В работе',
+            self::STATUS_COMPLETED => 'Завершено',
+            self::STATUS_CANCELED => 'Отменено'
+        ];
+    }
+
     public function tags(){
 
         return $this->belongsToMany( Tag::class, 'post_tags', 'post_id', 'tag_id' );

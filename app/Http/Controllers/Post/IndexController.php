@@ -14,6 +14,24 @@ class IndexController extends Controller
         $categories = Category::all();
         if(isset($posts)){
             foreach($posts as $post){
+                switch ($post->status_post) {
+                    case 0:
+                        $post['statusPostTitle'] = 'Отменено';
+                        break;
+                    case 1:
+                        $post['statusPostTitle'] = 'Подача заявок';
+                        break;
+                    case 2:
+                        $post['statusPostTitle'] = 'В работе';
+                        break;
+                    case 3:
+                        $post['statusPostTitle'] = 'Завершено';
+                        break;    
+                }
+                
+                if( $post->owner_post == auth()->user()->id ){
+                    $post['commentWriteAvailable'] = 0;
+                }
                 if(isset($post->comments)){
                     foreach($post->comments as $postComment){
                         if($postComment->user_id == auth()->user()->id){
