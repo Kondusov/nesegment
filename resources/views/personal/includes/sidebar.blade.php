@@ -53,10 +53,18 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('admin.post.index') }}" class="nav-link">
+            <a href="{{ route('my.posts') }}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Посты
+                Мои лоты
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('post.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Мои заявки
               </p>
             </a>
           </li>
