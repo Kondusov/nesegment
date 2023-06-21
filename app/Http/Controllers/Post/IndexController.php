@@ -36,7 +36,7 @@ class IndexController extends Controller
                     foreach($post->comments as $postComment){
                         if($postComment->user_id == auth()->user()->id){
                                     $post['commentWriteAvailable'] = 0;
-                                    break 2;
+                                    break 1;
                         }
                     }
                 }

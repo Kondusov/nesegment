@@ -14,6 +14,37 @@ class MyPostsController extends Controller
         $posts = Post::where('owner_post', '=', $myId)->paginate(5);
         $categories = Category::all();
         
+        if(isset($posts)){
+            foreach($posts as $post){
+                switch ($post->status_post) {
+                    case 0:
+                        $post['statusPostTitle'] = 'Отменено';
+                        break;
+                    case 1:
+                        $post['statusPostTitle'] = 'Подача заявок';
+                        break;
+                    case 2:
+                        $post['statusPostTitle'] = 'В работе';
+                        break;
+                    case 3:
+                        $post['statusPostTitle'] = 'Завершено';
+                        break;    
+                }
+                
+                if( $post->owner_post == auth()->user()->id ){
+                    $post['commentWriteAvailable'] = 0;
+                }
+                if(isset($post->comments)){
+                    foreach($post->comments as $postComment){
+                        if($postComment->user_id == auth()->user()->id){
+                                    $post['commentWriteAvailable'] = 0;
+                                    break 2;
+                        }
+                    }
+                }
+            }
+        }
+
         return  view('post.myposts', compact('posts','categories'));
     }
 }
