@@ -15,6 +15,8 @@ class IndexController extends Controller
         $data['userName'] = auth()->user()->name;
         $data['usersCount'] = User::all()->count();
         $data['postsCount'] = Post::all()->count();
+        $data['postsActivCount'] = Post::whereIn('status_post', [1, 2])->count();
+        $data['postsCompleteCount'] = Post::where('status_post', '=', 3)->count();
         return view('admin.main.index', compact('data'));
     }
 }

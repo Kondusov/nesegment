@@ -6,15 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 
-class IndexController extends Controller
+class MyCommentsPostsController extends Controller
 {
     public function __invoke(Post $post)
     {   
-        //$posts = Post::paginate(3); // все посты
-
-        $posts = Post::where('status_post', '=', 1 )->orWhere('status_post', '=', 2 )->paginate(5);
-
+        $myId = auth()->user()->id;
+        $posts = Post::where('best_comment_user_id', '=', $myId)->paginate(5);
         $categories = Category::all();
+        
         if(isset($posts)){
             foreach($posts as $post){
                 switch ($post->status_post) {
@@ -45,6 +44,7 @@ class IndexController extends Controller
                 }
             }
         }
-        return view('post.index', compact('posts','categories'));
+
+        return  view('post.my-comments-posts', compact('posts','categories'));
     }
 }

@@ -78,6 +78,9 @@
                   
                     
                       <img class="img-circle img-sm" src="" alt="User Image">
+                      @if($comment->id == $post->best_comment_id)
+                      <span class=" float-right bg-warning">Выбран исполнитель</span>
+                      @endif
                         <div class="comment-text">
                             <span class="username">
                             {{ $comment->user->name }}
@@ -89,6 +92,43 @@
                   <!-- /.comment-text -->
                 </div>
                 <!-- /.card-comment -->
+                @if( $post->owner->id == $post['auth_user'] && $post->best_comment_id == NULL )
+                  <div class="card-footer">
+                    <form action="{{ route('post.comment.best.store', $post->id) }}" method="post">
+                    @csrf
+                      <div class="form-check">
+                        <input name="best_comment_required" class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  required>
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Принять это предложение
+                        </label>
+                      </div>
+                      <input type="hidden" name="post_status" value="2">
+                      <input type="hidden" name="best_comment_id" id="" value="{{ $comment->id }}">
+                      <input type="hidden" name="best_comment_user_id" id="" value="{{ $comment->user->id }}">
+                      <div class="mt-3">
+                        <button type="submit" class="btn btn-primary mb-3">Подтвердить</button>
+                      </div>
+                    </form>
+                  </div>
+                @elseif($post->owner->id == $post['auth_user'] && $post->best_comment_id != NULL && $post->status_post == 2 && $comment->id == $post->best_comment_id )
+                <div class="card-footer">
+                    <form action="{{ route('post.comment.best.store', $post->id) }}" method="post">
+                    @csrf
+                      <div class="form-check">
+                        <input name="best_comment_completed" class="form-check-input" type="checkbox" value="1" title="Отметьте только в том случае, если вся работа выполнена исполнителем."  required>
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Работа выполнена
+                        </label>
+                      </div>
+                      <input type="hidden" name="post_status" value="3">
+                      <input type="hidden" name="best_comment_id" id="" value="{{ $comment->id }}">
+                      <input type="hidden" name="best_comment_user_id" id="" value="{{ $comment->user->id }}">
+                      <div class="mt-3">
+                        <button type="submit" class="btn btn-primary mb-3">Подтвердить выполнение</button>
+                      </div>
+                    </form>
+                  </div>
+                @endif
               </div>
               @endforeach
               @if($post['commentWriteAvailable'] != 0) <!-- если одна заявка текущим пользователем уже была подана, то не выводим форму новой заявки -->

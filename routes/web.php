@@ -3,14 +3,19 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', 'IndexController')->name('main.index');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Post', 'prefix' => 'posts', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/myposts', 'MyPostsController')->name('my.posts');
+    Route::get('/myzayavki', 'MyCommentsPostsController')->name('my.commenting.posts');
     Route::get('/', 'IndexController')->name('post.index');
+    Route::get('/arhiv_posts', 'ArhivController')->name('post.arhiv.index');
     Route::get('/{post}', 'ShowController')->name('post.show');
+    Route::post('/{post}', 'Comment\Best\StoreController')->name('post.comment.best.store');
 
     Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'], function () {
         Route::post('/', 'StoreController')->name('post.comment.store');
@@ -87,6 +92,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
         Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
     });
 });
+
+Route::get('mail/send_status-2', 'App\Http\Controllers\MailController@sendStatusInWork');
+Route::get('mail/send_status-3', 'App\Http\Controllers\MailController@sendStatusComplete');
+//Route::get('mail/send_status-info', function () {});
 
 Auth::routes(['verify' => true]);
 

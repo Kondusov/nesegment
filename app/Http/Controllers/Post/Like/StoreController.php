@@ -10,6 +10,6 @@ class StoreController extends Controller
     public function __invoke(Post $post)
     {
         //auth()->user()->LikedPosts()->toggle($post->id);
-        return redirect()->route('post.index', $post->id);
+        return 321;//redirect()->route('post.index', $post->id);
     }
 }

@@ -12,9 +12,10 @@ class ShowController extends Controller
 {
     public function __invoke(Post $post)
     {  
+        $post['auth_user'] = auth()->user()->id;
         $post['owner'] = $post->ownerPost;
         $commentWriteAvailable = 1;
-        
+        //dd($post->owner->id);
         if( $post->owner_post == auth()->user()->id ){
             $post['commentWriteAvailable'] = 0;
         }

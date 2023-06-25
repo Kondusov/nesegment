@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 
-class IndexController extends Controller
+class ArhivController extends Controller
 {
     public function __invoke(Post $post)
     {   
         //$posts = Post::paginate(3); // все посты
 
-        $posts = Post::where('status_post', '=', 1 )->orWhere('status_post', '=', 2 )->paginate(5);
+        $posts = Post::where('status_post', '=', 3 )->paginate(5);
 
         $categories = Category::all();
         if(isset($posts)){
@@ -45,6 +45,6 @@ class IndexController extends Controller
                 }
             }
         }
-        return view('post.index', compact('posts','categories'));
+        return view('post.arhiv.index', compact('posts','categories'));
     }
 }

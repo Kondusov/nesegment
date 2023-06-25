@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,10 +30,10 @@
                             <a class="nav-link" href="{{ route('post.index') }}">Лоты</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="blogDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="blogDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Все лоты</a>
                             <div class="dropdown-menu" aria-labelledby="blogDropdown">
-                                <a class="dropdown-item" href="blog.html">Blog Archive</a>
-                                <a class="dropdown-item" href="blog-single.html">Blog Post</a>
+                                <a class="dropdown-item" href="{{ route('post.index') }}">Активные лоты</a>
+                                <a class="dropdown-item" href="{{ route('post.arhiv.index') }}">Завершенные лоты</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
