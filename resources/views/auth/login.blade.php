@@ -70,4 +70,23 @@
         </div>
     </div>
 </div>
+<section class="pt-10 pt-md-12 mt-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8 text-center">
+
+            <!-- Heading -->
+            <h2>
+              Сервис для страховых агентов.
+            </h2>
+
+            <!-- Text -->
+            <p class="fs-lg text-muted mb-7 mb-md-9">
+              Любой участник может разместить объявление с запросом на оформление полиса. <br>Так же любой из участников может откликнуться на объявление и выполнить работу по оформлению полиса.
+            </p>
+
+          </div>
+        </div> <!-- / .row -->
+      </div> <!-- / .container -->
+    </section>
 @endsection

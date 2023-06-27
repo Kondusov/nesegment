@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('personal.layouts.main')
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -6,13 +6,9 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Добавление поста</h1>
+          <h1 class="m-0">Добавление лота</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
-          </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -26,11 +22,11 @@
       <div class="row">
         <div class="card card-primary">
         </div>
-        <form action="{{ route('admin.post.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('personal.post.store') }}" method="post" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="form-group">
-              <label for="exampleInputEmail1">Название поста</label>
+              <label for="exampleInputEmail1">Название лота</label>
               <input name="title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите название" value="{{ old('title') }}">
               @error('title')
               <div class="text-danger">{{ $message }}</div>
@@ -42,17 +38,21 @@
             <div class="text-danger">{{ $message }}</div>
             @enderror
             <div class="form-group">
-            <label>Выберите категорию</label>
+            <label>Категория ТС</label>
             <select class="form-control" name="category_id" >
+                <option value="" selected="selected" disabled>Выберите категорию ТС</option>
                 @foreach($categories as $category)
                   <option value="{{ $category->id }}"
                   {{ $category->id == old('category_id') ? 'selected' : '' }}
                   >{{ $category->title }}</option>
                 @endforeach
             </select>
+            @error('category_id')
+            <div class="text-danger">Нужно выбрать категорию ТС</div>
+            @enderror
             </div>
             <div class="form-group">
-                        <label>Выберите теги</label>
+                        <label>Выберите теги (для выбора нескольких тегов удерживайте клавишу Ctrl)</label>
                         <select name="tag_ids[]" multiple class="form-control">
                           @foreach($tags as $tag)
                           <option value="{{ $tag->id }}">{{ $tag->title }}</option>
@@ -60,13 +60,13 @@
                         </select>
                       </div>
           </div>
-          <label for="image_uploads">Добавление изображений (PNG, JPG)</label>
+          <label for="image_uploads">Добавление изображений (.jpg, .jpeg, .png)</label>
           <input type="file" id="image_uploads" name="image[]" accept=".jpg, .jpeg, .png" value="{{ old('image') }}" multiple />
           @error('image')
           <div class="text-danger">{{ $message }}</div>
           @enderror
-          <label for="image_uploads">Добавление файлов (PDF, TXT, DOC, EXEL, DOCX, ODT)</label>
-          <input type="file" id="file_uploads" name="file[]" accept=".pdf, .txt, .doc, .exel, .docx, .odt" value="{{ old('file') }}" multiple />
+          <label for="image_uploads">Добавление файлов</label>
+          <input type="file" id="file_uploads" name="file[]" accept="" value="{{ old('file') }}" multiple />
           @error('file')
           <div class="text-danger">{{ $message }}</div>
           @enderror

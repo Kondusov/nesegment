@@ -2,7 +2,7 @@
 @section('content')
 <main class="blog">
         <div class="container">
-            <h1 class="edica-page-title" data-aos="fade-up">Завершенные лоты лоты</h1>
+            <h1 class="edica-page-title" data-aos="fade-up">Завершенные лоты</h1>
             <section class="featured-posts-section">
                 <div class="row">
                     @foreach($posts as $post)
@@ -74,48 +74,6 @@
                 <span class="float-right text-muted text-underline"><a href="{{ route('post.show', $post->id) }}" >Подробнее</a></span>
               </div>
               <!-- /.card-body -->
-              @foreach($post->comments as $comment)
-              <div class="card-footer card-comments">
-                <!-- /.card-comment -->
-                <div class="card-comment">
-                  <!-- User image -->
-                  
-                    
-                      <img class="img-circle img-sm" src="" alt="User Image">
-                        <div class="comment-text">
-                            <span class="username">
-                            {{ $comment->user->name }}
-                            <span class="text-muted float-right">{{ $comment->created_at }}</span>
-                            </span><!-- /.username -->
-                            {{ $comment->message }}
-                        </div>
-                    
-                  <!-- /.comment-text -->
-                </div>
-                <!-- /.card-comment -->
-              </div>
-              @endforeach
-              @auth()
-              @if($post['commentWriteAvailable'] !== 0)
-              <!-- /.card-footer -->
-              <div class="card-footer">
-                <form action="{{ route('post.comment.store', $post->id) }}" method="post">
-                @csrf
-                  <div>
-                    <span>Подать заявку</span>
-                  </div>
-                  <!-- .img-push is used to add margin to elements next to floating images -->
-                  <div class="img-push">
-                    <input name="message" type="text" class="form-control form-control-sm" placeholder="Текст вашего предложения">
-                  </div>
-                  <div class="">
-                    <input type="submit" class="form-control form-control-sm w-25 btn btn-primary text-light mt-1" value="Отправить" placeholder="Отправить">
-                  </div>
-                </form>
-              </div>
-              <!-- /.card-footer -->
-              @endif
-              @endauth
             </div>
                     </div>
                     @endforeach

@@ -11,7 +11,7 @@ class MyPostsController extends Controller
     public function __invoke(Post $post)
     {   
         $myId = auth()->user()->id;
-        $posts = Post::where('owner_post', '=', $myId)->paginate(5);
+        $posts = Post::where('owner_post', '=', $myId)->latest()->paginate(8);
         $categories = Category::all();
         
         if(isset($posts)){

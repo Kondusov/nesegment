@@ -35,7 +35,7 @@
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">  <i class="fas fa-cog"></i> профиль</a>
+        <a class="nav-link" href="{{ route('admin.profile.index') }}">  <i class="fas fa-cog"></i> профиль</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <form action="{{ route('logout') }}" method="post" >
@@ -51,7 +51,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin.index') }}" class="brand-link">
+    <a href="{{ route('main.index') }}" class="brand-link">
       <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">NeSegment</span>
     </a>

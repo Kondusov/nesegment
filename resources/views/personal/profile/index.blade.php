@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('personal.layouts.main')
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Понравившиеся лоты</h1>
+          <h1 class="m-0">Мой профиль</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Главная</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item"><a href="{{ route('personal.profile.index') }}">Главная</a></li>
+            <li class="breadcrumb-item active">профиль</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -30,28 +30,16 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Название</th>
-                  <th class="text-center">Действие</th>
+                  <th>Имя</th>
+                  <th>Email</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($posts as $post)
                 <tr>
-                  <td>{{$post->id}}</td>
-                  <td>{{$post->title}}</td>
-                  <td class="d-flex justify-content-around px-1">
-                    <a href="{{ route('admin.post.show', $post->id) }}"><i class="fas fa-eye"></i></a>
-                    <a href="{{ route('admin.post.edit', $post->id) }}"><i class="fas fa-edit text-success"></i></a>
-                    <form action="{{ route('personal.liked.delete', $post->id) }}" method="POST" class="d-inline">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="col-md-auto">
-                        <i class="fas fa-trash text-danger"></i>
-                      </button>
-                    </form>
-                  </td>
+                  <td>{{$user->id}}</td>
+                  <td>{{$user->name}}</td>
+                  <td>{{$user->email}}</td>
                 </tr>
-                @endforeach
               </tbody>
             </table>
           </div>

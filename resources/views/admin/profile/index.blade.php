@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Пользователь : {{ $user->name }}</h1>
+          <h1 class="m-0">Мой профиль</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.profile.index') }}">Главная</a></li>
+            <li class="breadcrumb-item active">профиль</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -26,28 +26,21 @@
       <div class="row">
         <div class="col-12">
           <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
-              <tbody>
+            <table class="table">
+              <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Пользователь</td>
-                  <td>Email</td>
-                  <td class="text-center">Действие</td>
+                  <th>ID</th>
+                  <th>Имя</th>
+                  <th>Роль</th>
+                  <th>Email</th>
                 </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td>{{$user->id}}</td>
                   <td>{{$user->name}}</td>
+                  <td>{{$user->role}}</td>
                   <td>{{$user->email}}</td>
-                  <td class="d-flex justify-content-around px-1">
-                    <a title="Редактировать" href="{{ route('admin.user.edit', $user->id) }}"><i class="fas fa-edit text-success"></i></a>
-                    <form action="{{ route('admin.user.delete', $user->id) }}" method="POST" class="d-inline">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="col-md-auto">
-                        <i title="Удалить" class="fas fa-trash text-danger"></i>
-                      </button>
-                    </form>
-                  </td>
                 </tr>
               </tbody>
             </table>

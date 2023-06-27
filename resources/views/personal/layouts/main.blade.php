@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,20 +32,17 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('personal.profile.index') }}">  <i class="fas fa-cog"></i> профиль</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-      <ul>
-        <li class="nav-item d-none d-sm-inline-block">
-          <form action="{{ route('logout') }}" method="post" >
+        <form action="{{ route('logout') }}" method="post" >
             @csrf
             <input type="submit" value="Выйти" class="btn btn-outline-primary">
-          </form>
-        </li>
-      </ul>  
+        </form>
+      </li>
     </ul>
     </div>
   </nav>
@@ -54,7 +51,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin.index') }}" class="brand-link">
+    <a href="{{ route('main.index') }}" class="brand-link">
       <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">NeSegment</span>
     </a>

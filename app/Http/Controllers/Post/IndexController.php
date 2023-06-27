@@ -12,7 +12,7 @@ class IndexController extends Controller
     {   
         //$posts = Post::paginate(3); // все посты
 
-        $posts = Post::where('status_post', '=', 1 )->orWhere('status_post', '=', 2 )->paginate(5);
+        $posts = Post::where('status_post', '=', 1 )->orWhere('status_post', '=', 2 )->latest()->paginate(10);
 
         $categories = Category::all();
         if(isset($posts)){

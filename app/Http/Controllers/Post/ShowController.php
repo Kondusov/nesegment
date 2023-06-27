@@ -15,9 +15,9 @@ class ShowController extends Controller
         $post['auth_user'] = auth()->user()->id;
         $post['owner'] = $post->ownerPost;
         $commentWriteAvailable = 1;
-        //dd($post->owner->id);
-        if( $post->owner_post == auth()->user()->id ){
-            $post['commentWriteAvailable'] = 0;
+         //dd($post->owner->id);
+        if( $post->owner_post == auth()->user()->id || $post->status_post == 3){
+            $commentWriteAvailable = 0;
         }
         if(isset($post->comments)){
             foreach($post->comments as $comment){
@@ -44,6 +44,7 @@ class ShowController extends Controller
         //$ownerPost_user_id = $post->owner_post;
         //$ownerPost = User::find($ownerPost_user_id);
         $categories = Category::all();
+        //dd($commentWriteAvailable);
         return view('post.show', compact('post', 'categories', 'commentWriteAvailable'));
     }
 }

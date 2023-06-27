@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {   
-        $posts = Post::paginate(3);
+        //$posts = Post::paginate(3);
         return redirect()->route('post.index');
     }
 }

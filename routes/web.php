@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', 'IndexController')->name('main.index');
+    Route::get('/contacts', 'ContactsController')->name('main.contacts');
+    Route::post('/contacts', 'ContactsController')->name('main.contacts.send');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Post', 'prefix' => 'posts', 'middleware' => ['auth', 'verified']], function () {
@@ -34,9 +36,22 @@ Route::group(['namespace' => 'App\Http\Controllers\Category', 'prefix' => 'categ
     });
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth','admin', 'verified']], function () {
-    Route::group(['namespace' => 'Main'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'verified']], function () {
+    
     Route::get('/', 'IndexController')->name('personal.main.index');
+
+    Route::group(['namespace' => 'Profile'], function () {
+        Route::get('/profile', 'IndexController')->name('personal.profile.index');
+    });
+
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/posts', 'IndexController')->name('personal.post.index');
+        Route::get('/create', 'CreateController')->name('personal.post.create');
+        Route::get('/{post}/edit', 'EditController')->name('personal.post.edit');
+        Route::patch('/update{post}', 'UpdateController')->name('personal.post.update');
+        Route::get('/cancel{post}', 'CancelController')->name('personal.post.cancel');
+        Route::get('/{post}', 'ShowController')->name('personal.post.show');
+        Route::post('/', 'StoreController')->name('personal.post.store');
     });
 
         Route::group(['namespace' => 'Liked', 'prefix' => 'liked', 'middleware' => ['auth','admin', 'verified']], function () {
@@ -55,6 +70,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
     Route::group(['namespace' => 'Main'], function () {
         Route::get('/', 'IndexController')->name('admin.index');
     });
+
+    Route::group(['namespace' => 'Profile', 'prefix' => 'profile',], function () {
+        Route::get('/', 'IndexController')->name('admin.profile.index');
+    });
+
     Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
         Route::get('/', 'IndexController')->name('admin.post.index');
         Route::get('/create', 'CreateController')->name('admin.post.create');

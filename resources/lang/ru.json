@@ -1,0 +1,19 @@
+{
+    "Login": "Войти",
+    "Logout": "Выйти",
+    "Register": "Регистрация",
+    "Name": "Имя",
+    "Email Address": "Email",
+    "Password": "Пароль",
+    "Confirm Password": "Подвердите пароль",
+    "Reset Password": "Сброс пароля",
+    "Send Password Reset Link": "Отправить ссылку на сброс пароля",
+    "Remember Me": "Запомнить меня",
+    "Forgot Your Password?": "Забыли пароль ?",
+    "You are logged in!": "Вы успешно прошли регистрацию.",
+    "Dashboard": "Панель управления",
+    "Verify Your Email Address": "Подтвердите ваш адрес электронной почты.",
+    "click here to request another": "нажмите что-бы отправить запрос ещё раз",
+    "Before proceeding, please check your email for a verification link.": "Прежде чем приступить к работе, проверьте свою электронную почту на наличие проверочной ссылки.",
+    "If you did not receive the email": "Если вы не получили электронное письмо"
+  }

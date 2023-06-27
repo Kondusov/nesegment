@@ -12,7 +12,7 @@ class ArhivController extends Controller
     {   
         //$posts = Post::paginate(3); // все посты
 
-        $posts = Post::where('status_post', '=', 3 )->paginate(5);
+        $posts = Post::where('status_post', '=', 3 )->latest()->paginate(10);
 
         $categories = Category::all();
         if(isset($posts)){
@@ -32,17 +32,8 @@ class ArhivController extends Controller
                         break;    
                 }
                 
-                if( $post->owner_post == auth()->user()->id ){
-                    $post['commentWriteAvailable'] = 0;
-                }
-                if(isset($post->comments)){
-                    foreach($post->comments as $postComment){
-                        if($postComment->user_id == auth()->user()->id){
-                                    $post['commentWriteAvailable'] = 0;
-                                    break 1;
-                        }
-                    }
-                }
+                $post['commentWriteAvailable'] = 0;
+
             }
         }
         return view('post.arhiv.index', compact('posts','categories'));

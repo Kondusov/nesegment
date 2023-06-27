@@ -9,7 +9,7 @@
           @php
             $data['userName'] = auth()->user()->name;
           @endphp
-          <a href="{{ route('personal.main.index') }}" class="d-block">{{ $data['userName'] }}</a>
+          <a href="{{ route('admin.index') }}" class="d-block">{{ $data['userName'] }}</a>
         </div>
       </div>
 
@@ -88,7 +88,7 @@
             <a href="{{ route('admin.post.index') }}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Посты
+                Лоты
               </p>
             </a>
           </li>

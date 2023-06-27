@@ -13,8 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (auth())
+                        <div class="alert alert-success" role="alert">
+                            Поздравляем!<br>Регистрация прошла успешно.<br><a href="/">Перейти на Главную страницу</a>
+                        </div>
+                    @else
 
                     {{ __('You are logged in!') }}
+                    <p>Проверьте почтовый ящик. Там ссылка для подтверждения вашей электронной почты.</p>
+                    @endif
                 </div>
             </div>
         </div>
